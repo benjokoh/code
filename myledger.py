@@ -11,7 +11,8 @@ def add_transaction(description, amount):
     ledger.append(transaction)
     print("Transaction added!")
 
-def sub_transaction(description, amount):
+# Function to remove a transaction
+def remove_transaction(description, amount):
     transaction = {"description": description, "amount": amount}
     ledger.remove(transaction)
     print("Transaction removed!")
