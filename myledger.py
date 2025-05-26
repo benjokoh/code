@@ -40,7 +40,7 @@ def main():
         elif choice == "2":
             description = input("Enter description of transaction to remove: ")
             amount = float(input("Enter amount of transaction to remove: "))
-            sub_transaction(description, amount)
+            remove_transaction(description, amount)
         elif choice == "3":
             view_ledger()
         elif choice == "4":
