@@ -49,15 +49,4 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
-# Add a test block to simulate removing a transaction
-if __name__ == "__main__":
-    # Add a transaction
-    add_transaction("Test", 10.0)
-    print("Ledger after adding:")
-    view_ledger()
-    # Remove the transaction
-    sub_transaction("Test", 10.0)
-    print("Ledger after removing:")
-    view_ledger()
-    # Comment out main menu for test
-    # main()
+# Run the main function if this script is executed
