@@ -13,9 +13,12 @@ def add_transaction(description, amount):
 
 # Function to remove a transaction
 def remove_transaction(description, amount):
-    transaction = {"description": description, "amount": amount}
-    ledger.remove(transaction)
-    print("Transaction removed!")
+    for transaction in ledger:
+        if transaction["description"] == description and transaction["amount"] == amount:
+            ledger.remove(transaction)
+            print("Transaction removed!")
+            return
+    print("Transaction not found.")
 
 # Function to view all transactions
 def view_ledger():
@@ -27,10 +30,12 @@ def view_ledger():
 def main():
     while True:
         print("\nLedger Menu:")
+        print("_____________________")
         print("1. Add Transaction")
         print("2. Remove Transaction")
         print("3. View Ledger")
         print("4. Exit")
+        print("_____________________")
         choice = input("Choose an option: ")
 
         if choice == "1":
@@ -49,4 +54,6 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
-# Run the main function if this script is executed
+# Run the main menu if this script is executed directly
+if __name__ == "__main__":
+    main()
