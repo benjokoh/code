@@ -1,3 +1,5 @@
+from datetime import datetime
+
 # myledger.py
 
 # A simple ledger program to manage financial transactions
@@ -5,9 +7,10 @@
 # Define a list to store transactions
 ledger = []
 
-# Function to add a transaction
+# Function to add a transaction with date
 def add_transaction(description, amount):
-    transaction = {"description": description, "amount": amount}
+    date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    transaction = {"description": description, "amount": amount, "date": date}
     ledger.append(transaction)
     print("Transaction added!")
 
@@ -24,7 +27,7 @@ def remove_transaction(description, amount):
 def view_ledger():
     print("Ledger:")
     for transaction in ledger:
-        print(f"{transaction['description']}: ${transaction['amount']}")
+        print(f"{transaction['date']} | {transaction['description']}: ${transaction['amount']}")
 
 # Main menu
 def main():
@@ -53,6 +56,5 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")
-
 if __name__ == "__main__":
     main()
