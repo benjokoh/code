@@ -1,33 +1,45 @@
+import sqlite3
 from datetime import datetime
 
 # myledger.py
 
 # A simple ledger program to manage financial transactions
 
-# Define a list to store transactions
-ledger = []
+# Database setup
+conn = sqlite3.connect('ledger.db')
+cursor = conn.cursor()
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS ledger (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        description TEXT NOT NULL,
+        amount REAL NOT NULL,
+        date TEXT NOT NULL
+    )
+''')
+conn.commit()
 
 # Function to add a transaction with date
 def add_transaction(description, amount):
     date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    transaction = {"description": description, "amount": amount, "date": date}
-    ledger.append(transaction)
+    cursor.execute('INSERT INTO ledger (description, amount, date) VALUES (?, ?, ?)', (description, amount, date))
+    conn.commit()
     print("Transaction added!")
 
 # Function to remove a transaction
 def remove_transaction(description, amount):
-    for transaction in ledger:
-        if transaction["description"] == description and transaction["amount"] == amount:
-            ledger.remove(transaction)
-            print("Transaction removed!")
-            return
-    print("Transaction not found.")
+    cursor.execute('DELETE FROM ledger WHERE description = ? AND amount = ? LIMIT 1', (description, amount))
+    if cursor.rowcount > 0:
+        conn.commit()
+        print("Transaction removed!")
+    else:
+        print("Transaction not found.")
 
 # Function to view all transactions
 def view_ledger():
     print("Ledger:")
-    for transaction in ledger:
-        print(f"{transaction['date']} | {transaction['description']}: ${transaction['amount']}")
+    cursor.execute('SELECT date, description, amount FROM ledger')
+    for date, description, amount in cursor.fetchall():
+        print(f"{date} | {description}: ${amount}")
 
 # Main menu
 def main():

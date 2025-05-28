@@ -29,14 +29,14 @@ if __name__ == "__main__":
 
     # Test block to check add and remove transaction functionality with date
 if __name__ == "__main__":
-    add_transaction("Groceries", 50.0)
-    add_transaction("Books", 20.0)
+    myledger.add_transaction("Groceries", 50.0)
+    myledger.add_transaction("Books", 20.0)
     print("Ledger after adding transactions:")
-    view_ledger()
-    remove_transaction("Groceries", 50.0)
+    myledger.view_ledger()
+    myledger.remove_transaction("Groceries", 50.0)
     print("Ledger after removing 'Groceries':")
-    view_ledger()
-    remove_transaction("Nonexistent", 99.0)
+    myledger.view_ledger()
+    myledger.remove_transaction("Nonexistent", 99.0)
     print("Ledger after attempting to remove a nonexistent transaction:")
-    view_ledger()
+    myledger.view_ledger()
     # main()  # Commented out to avoid running the interactive menu during test
